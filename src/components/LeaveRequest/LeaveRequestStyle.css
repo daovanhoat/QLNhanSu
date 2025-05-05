@@ -1,0 +1,240 @@
+.container-department {
+  max-width: 90%;
+  margin: 40px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.form-submit {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.form-submit .input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.form-submit .button {
+  width: 150px;
+  height: 40px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+.form-submit .button:hover {
+  background-color: cornflowerblue;
+}
+.button-search {
+  width: 95px;
+  height: 40px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+.button-search:hover {
+  background-color: cornflowerblue;
+}
+.input-search {
+  width: 150px;
+  height: 40px;
+  border-radius: 4px;
+}
+.button-TimeKeep {
+  width: 70px;
+  height: 40px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+.button-TimeKeep:hover {
+  background-color: cornflowerblue;
+}
+.button-TimeKeep2 {
+  width: 100px;
+  height: 40px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+.button-TimeKeep2:hover {
+  background-color: cornflowerblue;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+.Filter-date {
+  display: flex;
+  gap: 5px;
+}
+.ipn-Date {
+  padding: 9px;
+  border-radius: 4px;
+}
+.btn-time {
+  width: 70px;
+  height: 40px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+.btn-time:hover {
+  background-color: cornflowerblue;
+}
+.table .tr1 {
+  background-color: #28a745;
+  color: aliceblue;
+}
+.table .th {
+  padding: 10px;
+  border: 1px solid #dee2e6;
+}
+.table .tr2 {
+  border-bottom: 1px solid #dee2e6;
+}
+.table .button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+}
+.table .button-Approve {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+}
+.btn.cancel {
+  background-color: #999;
+}
+.btn.delete {
+  background-color: #e74c3c;
+}
+.handleClick {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Hộp modal chính */
+.modal {
+  background-color: #fff;
+  padding: 20px 25px;
+  border-radius: 8px;
+  width: 380px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+.modal-close:hover {
+  color: #000;
+}
+
+/* Tiêu đề modal */
+.modal h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #2c3e50;
+}
+
+/* Label và input chung */
+.modal label {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Input, select, textarea */
+.modal input[type='text'],
+.modal input[type='date'],
+.modal input[type='time'],
+.modal select,
+.modal textarea {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Textarea riêng */
+.modal textarea {
+  resize: vertical;
+  height: 70px;
+}
+
+/* Nút hành động */
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Nút Gửi và Hủy */
+.modal .btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.modal .btn:hover {
+  opacity: 0.9;
+}
+
+.modal .btn.cancel {
+  background-color: #ccc;
+  color: #333;
+}
+
+.modal .btn:not(.cancel) {
+  background-color: #28a745;
+  color: white;
+}
+
+/* Lỗi */
+.modal .error {
+  color: red;
+  font-size: 13px;
+  margin-top: 5px;
+}
