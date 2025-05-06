@@ -127,7 +127,7 @@ export default {
       }
 
       // Kiểm tra chung
-      if (!form.value.userId || !form.value.date || !form.value.leaveType || !form.value.reason) {
+      if (!form.value.userId || !form.value.leaveType || !form.value.reason) {
         alert('Vui lòng nhập đầy đủ thông tin!')
         return
       }

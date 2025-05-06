@@ -17,6 +17,9 @@
         <option value="Nam">Nam</option>
         <option value="Nữ">Nữ</option>
       </select>
+      <label for="fileInput" class="custom-file-button">Chọn ảnh đại diện</label>
+      <input type="file" id="fileInput" @change="handleFileChangeAvatar" />
+      <!-- <div v-if="users" class="file-name">{{ users.values.avatar }}</div> -->
       <input v-model="newUser.age" placeholder="Tuổi" type="number" class="input" />
       <input v-model="newUser.cong" placeholder="Công" type="number" class="input" />
       <select v-model="newUser.positionId" class="input">
@@ -85,7 +88,15 @@
         <tr v-for="user in users" :key="user.userId" class="tr2">
           <td class="td">{{ user.userId }}</td>
           <td class="td">{{ user.name }}</td>
-          <td class="td">{{ user.name }}</td>
+          <td>
+            <img
+              :src="'https://localhost:44330' + user.avatar"
+              alt="Avatar"
+              width="60"
+              height="60"
+              style="border-radius: 30px"
+            />
+          </td>
           <td class="td">{{ user.departmentName }}</td>
           <td class="td">{{ user.positionName }}</td>
           <td class="td">{{ user.age }}</td>
@@ -103,17 +114,18 @@
     <div class="modal-content">
       <h2 class="h2-modal">Cập nhật thông tin</h2>
 
-      <input v-model="editUser.name" placeholder="Ten" class="styleObject" />
-      <input v-model="editUser.gener" placeholder="Gioi tinh" class="styleObject" />
-      <input v-model="editUser.age" placeholder="Tuoi" type="number" class="styleObject" />
-      <input v-model="editUser.cong" placeholder="cong" type="number" class="styleObject" />
-      <select v-model="selectedPositionId" class="styleObject">
+      <input v-model="editUser.name" placeholder="Ten" class="styleObject1" />
+      <input v-model="editUser.gener" placeholder="Gioi tinh" class="styleObject1" />
+      <input v-model="editUser.age" placeholder="Tuoi" type="number" class="styleObject1" />
+      <input v-model="editUser.cong" placeholder="cong" type="number" class="styleObject1" />
+      <input type="file" @change="handleFileChangeAvatar" />
+      <select v-model="selectedPositionId" class="styleObject1">
         <option disabled value="">Chọn Vị trí</option>
         <option v-for="pos in position" :key="pos.positionId" :value="pos.positionId">
           {{ pos.name }}
         </option>
       </select>
-      <select v-model="selectedDepartmentId" class="styleObject">
+      <select v-model="selectedDepartmentId" class="styleObject1">
         <option disabled value="">Chọn phòng ban</option>
         <option
           v-for="partment in departments"
@@ -157,8 +169,9 @@ const {
   filterDep,
   fileInput,
   handleFileChange,
-  // triggerFileInput,
   importExcelFile,
+  handleFileChangeAvatar,
+  // handleFileChangeAvatar2,
 } = userService()
 
 onMounted(() => {

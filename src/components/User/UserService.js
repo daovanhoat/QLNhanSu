@@ -11,6 +11,7 @@ export const userService = () => {
   const users = ref([])
   const position = ref([])
   const departments = ref([])
+  const avatarBase64 = ref(null)
   const newUser = ref({
     userId: '',
     name: '',
@@ -19,6 +20,7 @@ export const userService = () => {
     cong: 0,
     positionId: '',
     departmentId: '',
+    avatarBase64: '',
   })
   const searchKeyWord = ref('')
   const editUser = ref(null)
@@ -132,6 +134,28 @@ export const userService = () => {
     const res = await axios.get(API_DEPARTMENT)
     departments.value = res.data
   }
+  // Hàm chuyển ảnh thành base64
+  const handleFileChangeAvatar = (event) => {
+    const file = event.target.files[0]
+    if (!file) return
+
+    const reader = new FileReader()
+    reader.onload = () => {
+      newUser.value.avatarBase64 = reader.result
+      avatarBase64.value = reader.result
+    }
+    reader.readAsDataURL(file)
+  }
+  // const handleFileChangeAvatar2 = (event) => {
+  //   const file = event.target.files[0]
+  //   if (!file) return
+
+  //   const reader = new FileReader()
+  //   reader.onload = () => {
+  //     avatarBase64.value = reader.result // lưu base64 để dùng khi gửi
+  //   }
+  //   reader.readAsDataURL(file)
+  // }
 
   // Them
   const addUser = async () => {
@@ -147,6 +171,7 @@ export const userService = () => {
           cong: 0,
           positionId: '',
           departmentId: '',
+          avatarBase64: '',
         }
 
         await getUsers() // Cập nhật danh sách người dùng
@@ -176,6 +201,7 @@ export const userService = () => {
       ...editUser.value,
       positionId: selectedPositionId.value, // Gửi ID của vị trí đã chọn
       departmentId: selectedDepartmentId.value,
+      avatarBase64: avatarBase64.value || null,
     }
 
     try {
@@ -183,6 +209,7 @@ export const userService = () => {
       editUser.value = null // Đặt lại giá trị editUser
       selectedPositionId.value = null // Đặt lại giá trị ID vị trí đã chọn
       selectedDepartmentId.value = null
+      avatarBase64.value = null
       await getUsers() // Cập nhật danh sách người dùng
     } catch (error) {
       alert('Lỗi khi cập nhật người dùng: ' + error.message)
@@ -243,6 +270,7 @@ export const userService = () => {
     selectedPositionId,
     selectedDepartmentId,
     selectedFile,
+    avatarBase64,
     vali,
     getUsers,
     getPosition,
@@ -255,7 +283,8 @@ export const userService = () => {
     filterDep,
     fileInput,
     handleFileChange,
-    // triggerFileInput,
     importExcelFile,
+    handleFileChangeAvatar,
+    // handleFileChangeAvatar2,
   }
 }

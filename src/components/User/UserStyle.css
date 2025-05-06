@@ -1,20 +1,21 @@
-.styleObject {
-    border-radius: 5px;
-    margin: 10px;
-    width: auto;
-    height: 40px;
-    margin-bottom: 4px;
-    padding: 2px;
-    border: 1px solid #ccc;
+.styleObject1 {
+  border-radius: 5px;
+  margin: 5px;
+  width: auto;
+  height: 40px;
+  margin-bottom: 4px;
+  padding: 2px;
+  border: 1px solid #ccc;
+  width: 100%;
 }
 .styleObjectButtin {
-    background-color: blueviolet;
-    color: white;
-    padding: 2px; 
-    width: 70px;
-    height: 40px;
-    margin: 5px;
-    border-radius: 5px;
+  background-color: blueviolet;
+  color: white;
+  padding: 2px;
+  width: 70px;
+  height: 40px;
+  margin: 5px;
+  border-radius: 5px;
 }
 .container {
   width: 1000px;
@@ -32,7 +33,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.4); /* nền đen mờ */
+  background-color: rgba(0, 0, 0, 0.4); /* nền đen mờ */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,140 +46,165 @@
   border-radius: 8px;
   width: 500px;
   max-width: 90%;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 .content {
-    max-width: 90%; 
-    margin: 40px auto; 
-    padding: 20px; 
-    border: 1px solid #ccc; 
-    border-radius: 10px;
+  max-width: 90%;
+  margin: 40px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
 }
 .content .h2 {
-    font-size: 24px; 
-    font-weight: bold; 
-    text-align: center;
-    margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
 }
 .form {
-    display: flex; 
-    gap: 10px; 
-    flex-wrap: wrap; 
-    margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 .form .input {
-    flex: 1; 
-    padding: 8px; 
-    border: 1px solid #ccc; 
-    border-radius: 5px;
+  flex: 1;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 30px;
 }
 .form .button {
-    padding: 8px 16px; 
-    background-color: #007bff; 
-    color: white; 
-    border: none; 
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 .form .button:hover {
-    background-color: #c210de5a; /* Màu nền khi hover */
+  background-color: #c210de5a; /* Màu nền khi hover */
 }
 .search {
-    margin-bottom: 20px; 
-    display: flex; 
-    gap: 10px;
-    justify-content: flex-end;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
 }
 .search .input {
-    flex: 1; 
-    padding: 8px; 
-    border: 1px solid #ccc; 
-    border-radius: 5px;
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 .search .button {
-    padding: 8px 16px; 
-    background-color: #28a745; 
-    color: white; 
-    border: none; 
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 8px 16px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 .search .button:hover {
-    background-color: #c210de5a; /* Màu nền khi hover */
+  background-color: #c210de5a; /* Màu nền khi hover */
 }
 .table {
-    width: 100%; 
-    border-collapse: collapse; 
-    text-align: center;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
 }
 .table .tr1 {
-    background-color: #28a745; 
-    color: aliceblue;
+  background-color: #28a745;
+  color: aliceblue;
 }
 .table .th {
-    padding: 10px; 
-    border: 1px solid #dee2e6;
+  padding: 10px;
+  border: 1px solid #dee2e6;
 }
 .table .tr2 {
-    border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
 }
 .table .td {
-    padding: 10px;
+  padding: 10px;
 }
 .table .button-delete {
-    background-color: #dc3545; 
-    color: white; border: none; 
-    padding: 6px 12px; 
-    border-radius: 5px;
-    cursor: pointer;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 .table .button-delete:hover {
-    background-color: #c210de5a; /* Màu nền khi hover */
+  background-color: #c210de5a; /* Màu nền khi hover */
 }
 .table .button-edit {
-    background-color: #ffc107; 
-    color: black; 
-    border: none; 
-    padding: 6px 12px; 
-    border-radius: 5px; 
-    margin-left: 5px;
-    cursor: pointer;
+  background-color: #ffc107;
+  color: black;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  margin-left: 5px;
+  cursor: pointer;
 }
 .table .button-edit:hover {
-    background-color: #c210de5a; /* Màu nền khi hover */
+  background-color: #c210de5a; /* Màu nền khi hover */
 }
 .h2-modal {
-    color: black; 
-    font-weight: bold; 
-    margin-bottom: 16px; 
-    text-align: center;
+  color: black;
+  font-weight: bold;
+  margin-bottom: 16px;
+  text-align: center;
 }
 .div-button {
-    display: flex; 
-    justify-content: center; 
-    gap: 2px; 
-    margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  margin-top: 16px;
 }
 .hidden {
-    display: none; /* Ẩn ô input gốc */
+  display: none; /* Ẩn ô input gốc */
 }
 
 .custom-file-upload {
-    display: inline-block;
-    padding: 5px 10px;
-    cursor: pointer;
-    /* border: 1px solid black; */
-    background-color: #28a745;
-    color: white;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+  display: inline-block;
+  padding: 5px 10px;
+  cursor: pointer;
+  /* border: 1px solid black; */
+  background-color: #28a745;
+  color: white;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
 .custom-file-upload:hover {
-    background-color: #c210de5a; /* Màu nền khi hover */
+  background-color: #c210de5a; /* Màu nền khi hover */
 }
 .file-name {
-    margin-top: 10px;
-    font-style: italic;
-    color: #555;
+  margin-top: 10px;
+  font-style: italic;
+  color: #555;
+}
+.custom-file-button {
+  background-color: #4caf50; /* Màu xanh lá cây */
+  border: none;
+  color: white;
+  padding: 3px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s; /* Hiệu ứng chuyển màu */
+}
+
+.custom-file-button:hover {
+  background-color: #3e8e41; /* Màu xanh lá cây đậm hơn khi di chuột qua */
+}
+
+/* Ẩn input file mặc định */
+#fileInput {
+  display: none;
 }
