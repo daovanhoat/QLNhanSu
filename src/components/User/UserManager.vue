@@ -73,11 +73,11 @@
         <tr class="tr1">
           <th class="th">ID</th>
           <th class="th">Tên</th>
+          <th class="th">Hình ảnh</th>
           <th class="th">Phòng ban</th>
           <th class="th">Chức vụ</th>
           <th class="th">Tuổi</th>
           <th class="th">Giới tính</th>
-          <!-- <th class="th" >Công</th> -->
           <th class="th">Thao tác</th>
         </tr>
       </thead>
@@ -85,11 +85,11 @@
         <tr v-for="user in users" :key="user.userId" class="tr2">
           <td class="td">{{ user.userId }}</td>
           <td class="td">{{ user.name }}</td>
+          <td class="td">{{ user.name }}</td>
           <td class="td">{{ user.departmentName }}</td>
           <td class="td">{{ user.positionName }}</td>
           <td class="td">{{ user.age }}</td>
           <td class="td">{{ user.gener }}</td>
-          <!-- <td class="td">{{ user.cong }}</td> -->
           <td class="td">
             <button class="button-delete" @click="deleteUser(user.userId)">Xóa</button>
             <button class="button-edit" @click="startEdit(user)">Sửa</button>

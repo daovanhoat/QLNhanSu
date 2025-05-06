@@ -20,7 +20,7 @@ export default {
       endDate: '',
       startTime: '',
       endTime: '',
-      shift: '',
+      shift: 0,
       reason: 0,
       description: '',
     })
@@ -53,8 +53,8 @@ export default {
       }
     }
 
-    const convertShift = (shift) => {
-      switch (shift) {
+    const convertShift = (type) => {
+      switch (type) {
         case 0:
           return 'Ca sáng'
         case 1:
@@ -116,7 +116,7 @@ export default {
         Hourly: 2,
       }
 
-      const Shift = {
+      const typeShift = {
         morning: 0,
         afternoon: 1,
       }
@@ -172,13 +172,13 @@ export default {
         toTime: leaveType === 'Hourly' ? form.value.endTime : null,
         type: typeMap[leaveType],
         reason: reasonMap[form.value.reason],
-        shift: leaveType === 'HalfDay' ? Shift[form.value.shift] : null,
+        shift: leaveType === 'HalfDay' ? typeShift[form.value.shift] : null,
         description: form.value.description,
         createdAt: new Date().toISOString(),
         isApproved: false,
       }
 
-      console.log('Show payload' + payload.shift)
+      console.log('Show payload ' + payload.shift)
       try {
         await axios.post('https://localhost:44330/api/leavequest', payload)
         alert('Đăng ký thành công!')

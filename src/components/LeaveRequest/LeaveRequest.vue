@@ -19,16 +19,14 @@
         <button class="button-search" @click="searchLeaveRequests">Tìm kiếm</button>
         <div class="Filter-date">
           <div>
-            <label style="font-weight: bold;">Từ ngày:</label>
+            <label style="font-weight: bold">Từ ngày:</label>
             <input type="date" v-model="filters.fromDate" class="ipn-Date" />
           </div>
           <div>
-            <label style="font-weight: bold;">Đến ngày:</label>
+            <label style="font-weight: bold">Đến ngày:</label>
             <input type="date" v-model="filters.toDate" class="ipn-Date" />
           </div>
-          <button @click="searchLeaveRequests" class="btn-time">
-            Lọc
-          </button>
+          <button @click="searchLeaveRequests" class="btn-time">Lọc</button>
         </div>
         <button class="button-TimeKeep2" @click="deleteFilter">Tải lại trang</button>
       </div>
@@ -86,8 +84,8 @@
         </div>
         <label>Lý do:</label>
         <select v-model="form.reason">
-          <option value="Personal">Có tính công</option>
-          <option value="NoReason">Không tính công</option>
+          <option value="Paid">Có tính công</option>
+          <option value="Unpaid">Không tính công</option>
           <option value="Annual">Phép năm</option>
         </select>
 
@@ -127,7 +125,7 @@
           </td>
           <td style="padding: 10px">{{ convertType(leave.type) }}</td>
           <td style="padding: 10px">
-            <span v-if="leave.shift">
+            <span v-if="typeof leave.shift === 'number'">
               {{ convertShift(leave.shift) }}
             </span>
             <span v-else>-</span>
