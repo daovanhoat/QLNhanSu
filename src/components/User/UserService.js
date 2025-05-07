@@ -143,19 +143,10 @@ export const userService = () => {
     reader.onload = () => {
       newUser.value.avatarBase64 = reader.result
       avatarBase64.value = reader.result
+      editUser.value.avatarBase64 = reader.result
     }
     reader.readAsDataURL(file)
   }
-  // const handleFileChangeAvatar2 = (event) => {
-  //   const file = event.target.files[0]
-  //   if (!file) return
-
-  //   const reader = new FileReader()
-  //   reader.onload = () => {
-  //     avatarBase64.value = reader.result // lưu base64 để dùng khi gửi
-  //   }
-  //   reader.readAsDataURL(file)
-  // }
 
   // Them
   const addUser = async () => {
@@ -190,6 +181,7 @@ export const userService = () => {
     editUser.value = { ...users }
     selectedPositionId.value = users.positionId
     selectedDepartmentId.value = users.departmentId
+    avatarBase64.value = users.avatar
   }
 
   const updateUser = async () => {
@@ -285,6 +277,5 @@ export const userService = () => {
     handleFileChange,
     importExcelFile,
     handleFileChangeAvatar,
-    // handleFileChangeAvatar2,
   }
 }

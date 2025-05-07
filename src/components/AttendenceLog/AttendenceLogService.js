@@ -160,6 +160,10 @@ export const useAttendenceLog = () => {
     }
   }
 
+  const reloadFilter = async () => {
+    await getAttendanceLogs()
+  }
+
   return {
     attendanceLogs,
     users,
@@ -177,5 +181,6 @@ export const useAttendenceLog = () => {
     selectedUserNames,
     toggleDropdown,
     isDropdownOpen,
+    reloadFilter,
   }
 }

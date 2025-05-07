@@ -119,6 +119,16 @@
       <input v-model="editUser.age" placeholder="Tuoi" type="number" class="styleObject1" />
       <input v-model="editUser.cong" placeholder="cong" type="number" class="styleObject1" />
       <input type="file" @change="handleFileChangeAvatar" />
+      <img
+        v-if="avatarBase64"
+        :src="
+          avatarBase64.startsWith('data:') ? avatarBase64 : 'https://localhost:44330' + avatarBase64
+        "
+        alt="Avatar"
+        style="width: 100px; height: 100px; border-radius: 50px"
+      />
+
+      <!-- Nếu chưa chọn ảnh mới, hiển thị ảnh cũ từ server -->
       <select v-model="selectedPositionId" class="styleObject1">
         <option disabled value="">Chọn Vị trí</option>
         <option v-for="pos in position" :key="pos.positionId" :value="pos.positionId">
@@ -157,6 +167,7 @@ const {
   selectedPositionId,
   selectedDepartmentId,
   selectedFile,
+  avatarBase64,
   vali,
   getUsers,
   getPosition,
@@ -171,7 +182,6 @@ const {
   handleFileChange,
   importExcelFile,
   handleFileChangeAvatar,
-  // handleFileChangeAvatar2,
 } = userService()
 
 onMounted(() => {

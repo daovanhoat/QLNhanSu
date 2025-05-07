@@ -12,6 +12,7 @@
           </option>
         </select>
         <button class="button-TimeKeep" @click="filterUser">Lọc</button>
+        <button class="button-TimeKeep2" @click="reloadFilter">Tải lại trang</button>
       </div>
       <div class="button-right" style="display: flex; gap: 5px">
         <label for="fileInput" class="custom-file-upload-atd"> Chọn tệp </label>
@@ -161,6 +162,7 @@ const {
   selectedUserNames,
   toggleDropdown,
   isDropdownOpen,
+  reloadFilter,
 } = useAttendenceLog()
 
 onMounted(() => {
