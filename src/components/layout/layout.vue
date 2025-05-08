@@ -10,7 +10,9 @@
       "
     >
       <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 20px">
-        <h3 style="font-weight: bold; font-size: 28px; margin: 0">ADMIN</h3>
+        <h3 style="font-weight: bold; font-size: 28px; margin: 0">
+          {{ role === '1' ? 'ADMIN' : 'Nhân Viên' }}
+        </h3>
       </div>
       <div
         style="
@@ -31,10 +33,20 @@
           Đăng xuất
         </button>
       </div>
-      <router-link to="/nhansu" class="nav-link" :style="linkStyle('/nhansu')">Nhân Sự</router-link>
-      <router-link to="/luong" class="nav-link" :style="linkStyle('/luong')">Lương</router-link>
-      <router-link to="/heso" class="nav-link" :style="linkStyle('/heso')">Chức vụ</router-link>
-      <router-link to="/department" class="nav-link" :style="linkStyle('/department')"
+      <router-link to="/nhansu" class="nav-link" :style="linkStyle('/nhansu')" v-if="role === '1'"
+        >Nhân Sự</router-link
+      >
+      <router-link to="/luong" class="nav-link" :style="linkStyle('/luong')" v-if="role === '1'"
+        >Lương</router-link
+      >
+      <router-link to="/heso" class="nav-link" :style="linkStyle('/heso')" v-if="role === '1'"
+        >Chức vụ</router-link
+      >
+      <router-link
+        to="/department"
+        class="nav-link"
+        :style="linkStyle('/department')"
+        v-if="role === '1'"
         >Phòng ban</router-link
       >
       <router-link to="/workingInfo" class="nav-link" :style="linkStyle('/workingInfo')"
@@ -46,7 +58,7 @@
       <router-link to="/leaverequest" class="nav-link" :style="linkStyle('/leaverequest')"
         >Đăng ký xin nghỉ</router-link
       >
-      <router-link to="/account" class="nav-link" :style="linkStyle('/account')"
+      <router-link to="/account" class="nav-link" :style="linkStyle('/account')" v-if="role === '1'"
         >Tài khoản</router-link
       >
     </div>
@@ -66,8 +78,10 @@ const route = useRoute()
 const router = useRouter()
 const username = ref('')
 const hover = ref(false)
+const role = ref('')
 
 onMounted(() => {
+  role.value = localStorage.getItem('role') || ''
   const user = JSON.parse(localStorage.getItem('user'))
   if (user && user.userName) {
     username.value = user.userName

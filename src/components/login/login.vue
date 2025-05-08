@@ -32,13 +32,17 @@ const LoginAccount = async () => {
       userName: loginUsername.value,
       password: loginPassword.value,
     })
-    const { token, username } = res.data
-
+    const { token, username, role } = res.data
     // Lưu token và tên người dùng vào localStorage
     localStorage.setItem('token', token)
     localStorage.setItem('username', username)
+    localStorage.setItem('role', role)
     localStorage.setItem('user', JSON.stringify(res.data))
-    router.push('/nhansu')
+    if (role === 'Admin') {
+      router.push('/nhansu') // admin chuyển đến nhân sự
+    } else {
+      router.push('/workingInfo') // user chuyển đến lịch sử công việc
+    }
     console.log('Đăng nhập thành công')
     errorMessage.value = '' // reset thông báo lỗi nếu có
   } catch (err) {

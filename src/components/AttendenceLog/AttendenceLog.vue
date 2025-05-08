@@ -5,17 +5,19 @@
     <!-- Nút mở modal -->
     <div class="content-button">
       <div style="display: flex; gap: 5px">
-        <select v-model="selectUserId" style="height: 40px; border-radius: 4px">
+        <select v-model="selectUserId" style="height: 40px; border-radius: 4px" v-if="role === '1'">
           <option disabled value="">Tất cả nhân viên</option>
           <option v-for="user in users" :key="user.userId" :value="user.userId">
             {{ user.name }}
           </option>
         </select>
-        <button class="button-TimeKeep" @click="filterUser">Lọc</button>
-        <button class="button-TimeKeep2" @click="reloadFilter">Tải lại trang</button>
+        <button class="button-TimeKeep" @click="filterUser" v-if="role === '1'">Lọc</button>
+        <button class="button-TimeKeep2" @click="reloadFilter" v-if="role === '1'">
+          Tải lại trang
+        </button>
       </div>
       <div class="button-right" style="display: flex; gap: 5px">
-        <label for="fileInput" class="custom-file-upload-atd"> Chọn tệp </label>
+        <label for="fileInput" class="custom-file-upload-atd" v-if="role === '1'"> Chọn tệp </label>
         <input
           type="file"
           ref="fileInput"
@@ -26,8 +28,8 @@
         />
         <div v-if="selectedFile" class="file-name">{{ selectedFile.name }}</div>
         <!-- Import sau khi chọn -->
-        <button class="import" @click="importExcelFile">Import</button>
-        <button @click="showModal = true" class="button-TimeKeep">Chấm công</button>
+        <button class="import" @click="importExcelFile" v-if="role === '1'">Import</button>
+        <button @click="showModal = true" class="button-TimeKeep-Attendence">Chấm công</button>
       </div>
     </div>
 
@@ -53,17 +55,6 @@
         <p>
           Nhân viên đã chọn ({{ selectedUserNames.length }}): {{ selectedUserNames.join(', ') }}
         </p>
-
-        <!-- <div class="time-inputs">
-          <div>
-            <label>Giờ vào:</label>
-            <input type="time" v-model="newAttendence.checkInTime" />
-          </div>
-          <div>
-            <label>Giờ ra:</label>
-            <input type="time" v-model="newAttendence.checkOutTime" />
-          </div>
-        </div> -->
 
         <div class="time-inputs">
           <div>
@@ -101,7 +92,7 @@
           <th class="th">Giờ ra</th>
           <th class="th">Tổng công</th>
           <th class="th">Ghi chú</th>
-          <th class="th">Thao tác</th>
+          <th class="th" v-if="role === '1'">Thao tác</th>
         </tr>
       </thead>
       <tbody>
@@ -132,8 +123,14 @@
           </td>
           <td style="padding: 10px">{{ attendence.totalHours }}</td>
           <td style="padding: 10px">{{ attendence.description }}</td>
-          <td style="padding: 10px">
-            <button @click="deleteAttendence(attendence.id)" class="button">Xóa</button>
+          <td style="padding: 10px" v-if="role === '1'">
+            <button
+              @click="deleteAttendence(attendence.id)"
+              class="button"
+              :disabled="role !== '1'"
+            >
+              Xóa
+            </button>
           </td>
         </tr>
       </tbody>
@@ -141,10 +138,10 @@
   </div>
 </template>
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useAttendenceLog } from './AttendenceLogService'
 // import Multiselect from 'vue-multiselect'
-
+const role = ref('')
 const {
   attendanceLogs,
   users,
@@ -166,6 +163,7 @@ const {
 } = useAttendenceLog()
 
 onMounted(() => {
+  role.value = localStorage.getItem('role') || ''
   getAttendanceLogs()
   getUsers()
 })

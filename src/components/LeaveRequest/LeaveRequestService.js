@@ -1,4 +1,4 @@
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
 
 export default {
@@ -24,6 +24,7 @@ export default {
       reason: 0,
       description: '',
     })
+    const role = ref('')
 
     const API = 'https://localhost:44330/api/leavequest'
 
@@ -65,19 +66,42 @@ export default {
     }
 
     onMounted(async () => {
+      role.value = localStorage.getItem('role') || ''
       await getUsers()
       await getLeaves()
     })
 
     const getUsers = async () => {
-      const res = await axios.get('https://localhost:44330/api/user')
+      const token = localStorage.getItem('token')
+      const res = await axios.get('https://localhost:44330/api/user', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       users.value = res.data
     }
 
     const getLeaves = async () => {
-      const res = await axios.get(API)
+      const token = localStorage.getItem('token')
+
+      const res = await axios.get(API, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       leaveList.value = res.data
     }
+
+    const filteredUsers = computed(() => {
+      const rawList = role.value === '1' ? users.value : leaveList.value
+      const seen = new Set()
+      return rawList.filter((user) => {
+        const name = role.value === '1' ? user.name : user.userName
+        if (seen.has(name)) return false
+        seen.add(name)
+        return true
+      })
+    })
 
     const isDuplicateDate = () => {
       const leaveType = form.value.leaveType
@@ -103,6 +127,7 @@ export default {
     }
 
     const submitLeave = async () => {
+      const token = localStorage.getItem('token')
       const leaveType = form.value.leaveType
       const reasonMap = {
         Paid: 0,
@@ -180,7 +205,11 @@ export default {
 
       console.log('Show payload ' + payload.shift)
       try {
-        await axios.post('https://localhost:44330/api/leavequest', payload)
+        await axios.post('https://localhost:44330/api/leavequest', payload, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         alert('Đăng ký thành công!')
         showModal.value = false
         await getLeaves()
@@ -191,10 +220,15 @@ export default {
     }
 
     const deleteLeave = async (id) => {
+      const token = localStorage.getItem('token')
       const confirmed = window.confirm('Ban co chac muon tu choi yeu cau nay')
       if (!confirmed) return
       try {
-        await axios.post(`${API}/${id}`)
+        await axios.post(`${API}/${id}`, null, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         await getLeaves()
         alert('Xoa thanh cong')
       } catch (err) {
@@ -207,11 +241,16 @@ export default {
     }
 
     const approveLeave = async (id) => {
+      const token = localStorage.getItem('token')
       const confirmed = window.confirm('Bạn có chắc muốn duyệt đơn này không?')
       if (!confirmed) return
 
       try {
-        await axios.post(`${API}/approve/${id}`)
+        await axios.post(`${API}/approve/${id}`, null, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Gửi token trong header
+          },
+        })
         alert('Đã duyệt đơn nghỉ!')
         await getLeaves() // refresh lại danh sách
       } catch (error) {
@@ -221,6 +260,7 @@ export default {
     }
 
     const searchLeaveRequests = async () => {
+      const token = localStorage.getItem('token')
       try {
         const res = await axios.get(API, {
           params: {
@@ -228,6 +268,9 @@ export default {
             fromDate: filters.value.fromDate || null,
             toDate: filters.value.toDate || null,
             keyword: filters.value.keyword || null,
+          },
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
         })
         leaveList.value = res.data
@@ -239,6 +282,7 @@ export default {
     return {
       showModal,
       users,
+      role,
       leaveList,
       form,
       filters,
@@ -251,6 +295,7 @@ export default {
       deleteFilter,
       approveLeave,
       searchLeaveRequests,
+      filteredUsers,
     }
   },
 }

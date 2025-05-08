@@ -125,6 +125,10 @@
   border: none;
   padding: 6px 12px;
   border-radius: 5px;
+  cursor: pointer;
+}
+.table .button-Approve:hover {
+  background-color: cornflowerblue;
 }
 .btn.cancel {
   background-color: #999;
@@ -237,4 +241,8 @@
   color: red;
   font-size: 13px;
   margin-top: 5px;
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

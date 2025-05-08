@@ -3,14 +3,16 @@
     <h2 class="title">Lịch sử công việc</h2>
 
     <div class="searchWorking">
-      <select v-model="selectedUserId">
+      <select v-model="selectedUserId" v-if="role === '1'">
         <option disabled value="">Chọn nhân viên</option>
         <option v-for="working in workingInfos" :key="working.userId" :value="working.userId">
           {{ working.user }}
         </option>
       </select>
-      <button class="button" @click="filterUserWorkingInfo">Lọc</button>
-      <button class="button-TimeKeep2" @click="reloadFilter">Tải lại trang</button>
+      <button class="button" @click="filterUserWorkingInfo" v-if="role === '1'">Lọc</button>
+      <button class="button-TimeKeep2" @click="reloadFilter" v-if="role === '1'">
+        Tải lại trang
+      </button>
     </div>
 
     <!-- Bảng danh sách -->
@@ -23,7 +25,7 @@
           <th class="th">Chức vụ</th>
           <th class="th">Phòng ban</th>
           <th class="th">Thời gian</th>
-          <th class="th">Thao tác</th>
+          <th class="th" v-if="role === '1'">Thao tác</th>
         </tr>
       </thead>
       <tbody>
@@ -45,7 +47,7 @@
                 : 'Đang làm'
             }}
           </td>
-          <td style="padding: 10px">
+          <td style="padding: 10px" v-if="role === '1'">
             <button @click="deleteAccount(account.accountId)" class="button">Xóa</button>
           </td>
         </tr>
@@ -54,8 +56,9 @@
   </div>
 </template>
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useWorkingInfoService } from './workingInfoService'
+const role = ref('')
 
 const {
   workingInfos,
@@ -67,6 +70,7 @@ const {
 } = useWorkingInfoService()
 
 onMounted(() => {
+  role.value = localStorage.getItem('role') || ''
   getWorkingInfo()
 })
 </script>

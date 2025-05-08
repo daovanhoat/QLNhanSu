@@ -15,7 +15,7 @@
   display: flex;
   justify-content: space-between;
 }
-.button-TimeKeep {
+.button-TimeKeep-Attendence {
   width: 100px;
   height: 40px;
   background-color: #28a745;
@@ -24,7 +24,7 @@
   color: white;
   cursor: pointer;
 }
-.button-TimeKeep:hover {
+.button-TimeKeep-Attendence:hover {
   background-color: cornflowerblue;
 }
 /* Nền mờ */

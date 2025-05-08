@@ -82,10 +82,14 @@ export const useAttendenceLog = () => {
     // console.log(res.data)
   }
   const getAttendanceLogs = async () => {
+    const token = localStorage.getItem('token')
     try {
-      const res = await axios.get(API)
+      const res = await axios.get(API, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       attendanceLogs.value = res.data
-      console.log(attendanceLogs)
     } catch (error) {
       console.error('Lỗi khi lấy danh sách chấm công:', error)
     }
@@ -143,12 +147,14 @@ export const useAttendenceLog = () => {
   }
 
   const filterUser = async () => {
-    console.log('Loc duoc nhan')
-    console.log('User ID được chọn:', selectUserId.value)
+    const token = localStorage.getItem('token')
     try {
       const res = await axios.get(`${API}/filter`, {
         params: {
           userId: selectUserId.value,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
       })
       console.log(res)

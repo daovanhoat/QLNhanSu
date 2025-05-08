@@ -2,6 +2,7 @@ import { ref } from 'vue'
 import axios from 'axios'
 
 const API = 'https://localhost:44330/api/workingInfo/working-info'
+const APIFIL = 'https://localhost:44330/api/workingInfo'
 
 export const useWorkingInfoService = () => {
   const workingInfos = ref([])
@@ -21,11 +22,14 @@ export const useWorkingInfoService = () => {
   }
 
   const filterUserWorkingInfo = async () => {
-    console.log('Lọc được nhấn')
+    const token = localStorage.getItem('token')
     try {
-      const res = await axios.get(`${API}/filter`, {
+      const res = await axios.get(`${APIFIL}/filter`, {
         params: {
           userId: selectedUserId.value,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`, // Gửi token trong header
         },
       })
       workingInfos.value = res.data

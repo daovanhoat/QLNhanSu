@@ -24,7 +24,13 @@ const routes = [
     path: '/',
     component: layout,
     children: [
-      { path: '/', redirect: '/nhansu' },
+      {
+        path: '/',
+        redirect: () => {
+          const role = localStorage.getItem('role') || ''
+          return role === 'Admin' ? '/nhansu' : '/workingInfo'
+        },
+      },
       {
         path: '/nhansu',
         component: UserManager,
@@ -74,11 +80,17 @@ router.beforeEach((to, from, next) => {
   const publicPages = ['/login', '/register']
   const authRequired = !publicPages.includes(to.path)
   const loggedIn = localStorage.getItem('user')
+  const role = localStorage.getItem('role')
 
   if (authRequired && !loggedIn) {
     return next('/login')
   }
-
+  if (
+    role === 'User' &&
+    ['/nhansu', '/luong', '/heso', '/account', '/department'].includes(to.path)
+  ) {
+    return next('/workingInfo')
+  }
   next()
 })
 

@@ -4,13 +4,19 @@
 
     <div class="handleClick">
       <div style="display: flex; gap: 5px">
-        <select v-model="filters.userId" style="height: 40px; border-radius: 4px">
+        <select
+          v-model="filters.userId"
+          style="height: 40px; border-radius: 4px"
+          v-if="role === '1'"
+        >
           <option disabled value="">Tất cả nhân viên</option>
           <option v-for="user in users" :key="user.userId" :value="user.userId">
             {{ user.name }}
           </option>
         </select>
-        <button class="button-TimeKeep" @click="searchLeaveRequests">Lọc</button>
+        <button class="button-TimeKeep" @click="searchLeaveRequests" v-if="role === '1'">
+          Lọc
+        </button>
         <input
           v-model="filters.keyword"
           placeholder="Tìm tên, ca, loại nghỉ..."
@@ -43,7 +49,9 @@
         <label>Nhân viên:</label>
         <select v-model="form.userId">
           <option value="">-- Chọn --</option>
-          <option v-for="user in users" :value="user.userId">{{ user.name }}</option>
+          <option v-for="user in filteredUsers" :value="user.userId">
+            {{ role === '1' ? user.name : user.userName }}
+          </option>
         </select>
 
         <label>Loại nghỉ:</label>
@@ -112,7 +120,7 @@
           <th class="th">Giờ nghỉ</th>
           <th class="th">Lý do</th>
           <th class="th">Ghi chú</th>
-          <th class="th">Thao tác</th>
+          <th class="th" v-if="role === '1'">Thao tác</th>
         </tr>
       </thead>
       <tbody>
@@ -150,11 +158,14 @@
           </td>
           <td style="padding: 10px">{{ convertReason(leave.reason) }}</td>
           <td style="padding: 10px">{{ leave.description }}</td>
-          <td style="display: flex; gap: 4px; justify-content: center">
+          <td style="display: flex; gap: 4px; justify-content: center" v-if="role === '1'">
             <button class="button" @click="deleteLeave(leave.id)">Từ chối</button>
+
+            <!-- Nút duyệt -->
             <button class="button-Approve" @click="approveLeave(leave.id)" v-if="!leave.isApproved">
               Duyệt
             </button>
+
             <span v-else style="color: green">Đã duyệt</span>
           </td>
         </tr>
