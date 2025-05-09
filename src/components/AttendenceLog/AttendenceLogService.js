@@ -12,14 +12,15 @@ export const useAttendenceLog = () => {
     userIds: [],
     fromDate: '',
     toDate: '',
-    checkInTime: '08:00',
-    checkOutTime: '17:30',
+    checkInTime: '',
+    checkOutTime: '',
     description: '',
   })
   const selectUserId = ref('')
   const selectedFile = ref(null)
 
   const isDropdownOpen = ref(false)
+  const role = ref('')
 
   const toggleDropdown = () => {
     isDropdownOpen.value = !isDropdownOpen.value
@@ -79,7 +80,6 @@ export const useAttendenceLog = () => {
   const getUsers = async () => {
     const res = await axios.get(APIURL)
     users.value = res.data
-    // console.log(res.data)
   }
   const getAttendanceLogs = async () => {
     const token = localStorage.getItem('token')
@@ -95,11 +95,23 @@ export const useAttendenceLog = () => {
     }
   }
 
+  const filteredUsers = computed(() => {
+    const rawList = role.value === '1' ? users.value : attendanceLogs.value
+    const seen = new Set()
+    return rawList.filter((user) => {
+      const name = role.value === '1' ? user.name : user.userName
+      if (seen.has(name)) return false
+      seen.add(name)
+      return true
+    })
+  })
+
   const formatDate = (date) => {
     return new Date(date).toLocaleDateString('en-CA') // '2025-05-02'
   }
 
   const submitAttendance = async () => {
+    const token = localStorage.getItem('token')
     const selectedDateFormatted = formatDate(newAttendence.value.fromDate)
 
     // Kiểm tra trùng ngày
@@ -122,7 +134,11 @@ export const useAttendenceLog = () => {
     }
     // Nếu không trùng thì tiếp tục gửi
     try {
-      await axios.post(API, newAttendence.value)
+      await axios.post(API, newAttendence.value, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       alert('Chấm công thành công!')
       showModal.value = false
       await getAttendanceLogs()
@@ -176,6 +192,7 @@ export const useAttendenceLog = () => {
     newAttendence,
     selectUserId,
     selectedFile,
+    role,
     getAttendanceLogs,
     submitAttendance,
     getUsers,
@@ -188,5 +205,6 @@ export const useAttendenceLog = () => {
     toggleDropdown,
     isDropdownOpen,
     reloadFilter,
+    filteredUsers,
   }
 }

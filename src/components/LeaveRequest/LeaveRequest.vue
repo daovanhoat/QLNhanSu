@@ -50,7 +50,7 @@
         <select v-model="form.userId">
           <option value="">-- Chọn --</option>
           <option v-for="user in filteredUsers" :value="user.userId">
-            {{ role === '1' ? user.name : user.userName }}
+            {{ role === 1 ? user.name : user.userName }}
           </option>
         </select>
 

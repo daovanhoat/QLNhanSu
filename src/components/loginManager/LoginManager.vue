@@ -1,7 +1,32 @@
 <template>
   <div class="container-LoginManager">
     <h2 class="title">Quản Lý Tài Khoản</h2>
+    <div class="content-button-Register">
+      <button @click="showModal = true" class="button-TimeKeep-LogInManager">
+        Đăng ký tài khoản
+      </button>
+    </div>
 
+    <div v-if="showModal" class="modal-overlay">
+      <div class="modal-content">
+        <button class="modal-close" @click="showModal = false">&times;</button>
+        <h3>Form đăng ký tài khoản</h3>
+
+        <div class="dropdown-container">
+          <div class="dropdown-display" @click="toggleDropdown">
+            <!-- {{ selectedUserNames.length > 0 ? selectedUserNames.join(', ') : 'Chọn nhân viên' }} -->
+          </div>
+
+          <div v-if="isDropdownOpen" class="dropdown-options">
+            <label v-for="user in filteredUsers" :key="user.userId" class="dropdown-option">
+              <input type="checkbox" :value="user.userId" v-model="newAttendence.userIds" />
+              <!-- {{ role === 1 ? user.name : user.userName }} -->
+            </label>
+          </div>
+        </div>
+        <button @click="RegisterAccount" class="Register">Đăng ký</button>
+      </div>
+    </div>
     <!-- Bảng danh sách -->
     <table class="table" style="">
       <thead>
@@ -34,7 +59,15 @@
 import { onMounted } from 'vue'
 import { useLoginManager } from './LoginManagerService'
 
-const { accounts, getAccount, deleteAccount } = useLoginManager()
+const {
+  accounts,
+  isDropdownOpen,
+  showModal,
+  getAccount,
+  deleteAccount,
+  toggleDropdown,
+  RegisterAccount,
+} = useLoginManager()
 
 onMounted(() => {
   getAccount()

@@ -5,7 +5,6 @@ import position from '@/components/position/Position.vue'
 import layout from '@/components/layout/layout.vue'
 import account from '@/components/loginManager/LoginManager.vue'
 import Login from '@/components/login/login.vue' //
-import Register from '@/components/register/Register.vue'
 import Department from '@/components/Department/Department.vue'
 import WorkingInfo from '@/components/workingInfo/workingInfo.vue'
 import AttendenceLog from '@/components/AttendenceLog/AttendenceLog.vue'
@@ -15,10 +14,6 @@ const routes = [
   {
     path: '/login',
     component: Login,
-  },
-  {
-    path: '/register',
-    component: Register,
   },
   {
     path: '/',
@@ -85,10 +80,7 @@ router.beforeEach((to, from, next) => {
   if (authRequired && !loggedIn) {
     return next('/login')
   }
-  if (
-    role === 'User' &&
-    ['/nhansu', '/luong', '/heso', '/account', '/department'].includes(to.path)
-  ) {
+  if (role === 0 && ['/nhansu', '/luong', '/heso', '/account', '/department'].includes(to.path)) {
     return next('/workingInfo')
   }
   next()

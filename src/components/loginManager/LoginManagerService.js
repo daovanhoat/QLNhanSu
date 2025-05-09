@@ -5,15 +5,14 @@ const API = 'https://localhost:44330/api/account'
 
 export const useLoginManager = () => {
   const accounts = ref([])
+  const showModal = ref(false)
+  const isDropdownOpen = ref(false)
 
-  //   const getAccount = async () => {
-  //     var res = await axios.get(API)
-  //     accounts.value = res.data
-  //   }
-
+  const toggleDropdown = () => {
+    isDropdownOpen.value = !isDropdownOpen.value
+  }
   const getAccount = async () => {
     const token = localStorage.getItem('token')
-    console.log(token)
     if (!token) return (window.location.href = '/login')
     try {
       // Gửi yêu cầu API với token trong header Authorization
@@ -48,9 +47,17 @@ export const useLoginManager = () => {
     await getAccount()
   }
 
+  const RegisterAccount = async () => {
+    showModal.value = false
+  }
+
   return {
     accounts,
+    isDropdownOpen,
+    showModal,
     getAccount,
     deleteAccount,
+    toggleDropdown,
+    RegisterAccount,
   }
 }

@@ -45,9 +45,9 @@
           </div>
 
           <div v-if="isDropdownOpen" class="dropdown-options">
-            <label v-for="user in users" :key="user.userId" class="dropdown-option">
+            <label v-for="user in filteredUsers" :key="user.userId" class="dropdown-option">
               <input type="checkbox" :value="user.userId" v-model="newAttendence.userIds" />
-              {{ user.name }}
+              {{ role === 1 ? user.name : user.userName }}
             </label>
           </div>
         </div>
@@ -64,6 +64,17 @@
           <div>
             <label>Đến ngày:</label>
             <input type="date" v-model="newAttendence.toDate" />
+          </div>
+        </div>
+
+        <div class="time-inputs">
+          <div>
+            <label>Giờ vào:</label>
+            <input type="time" v-model="newAttendence.checkInTime" />
+          </div>
+          <div>
+            <label>Giờ ra:</label>
+            <input type="time" v-model="newAttendence.checkOutTime" />
           </div>
         </div>
 
@@ -160,6 +171,7 @@ const {
   toggleDropdown,
   isDropdownOpen,
   reloadFilter,
+  filteredUsers,
 } = useAttendenceLog()
 
 onMounted(() => {
@@ -167,9 +179,5 @@ onMounted(() => {
   getAttendanceLogs()
   getUsers()
 })
-
-// const showModal = ref(false)
 </script>
-<style src="./AttendenceLogStyle.css">
-/* @import '../../../node_modules/vue-multiselect/dist/vue-multiselect.min.css'; */
-</style>
+<style src="./AttendenceLogStyle.css"></style>
